@@ -64,7 +64,7 @@ $this->start_controls_tabs( 'form_tabs_style' );
         'default' => '',
         'scheme' => [
           'type' => Scheme_Color::get_type(),
-          'value' => Scheme_Color::COLOR_2,
+          'value' => Scheme_Color::COLOR_3,
         ],
         'selectors' => [
           '{{WRAPPER}} .global-class' => 'color: {{VALUE}};',
@@ -79,7 +79,7 @@ $this->start_controls_tabs( 'form_tabs_style' );
         'type' => Controls_Manager::COLOR,
         'scheme' => [
           'type' => Scheme_Color::get_type(),
-          'value' => Scheme_Color::COLOR_1,
+          'value' => Scheme_Color::COLOR_2,
         ],
         'selectors' => [
           '{{WRAPPER}} .global-class' => 'background-color: {{VALUE}};',

@@ -62,7 +62,7 @@ $this->start_controls_tabs( 'placeholder_tabs_button_style' );
         'type' => Controls_Manager::COLOR,
         'scheme' => [
           'type' => Scheme_Color::get_type(),
-          'value' => Scheme_Color::COLOR_2,
+          'value' => Scheme_Color::COLOR_3,
         ],
         'default' => '',
         'selectors' => [

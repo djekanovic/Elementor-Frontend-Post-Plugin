@@ -173,7 +173,17 @@ class Frontend_Post extends Widget_Base {
 		$html_logged_out = $this->get_settings('html_logged_out');
 
 
+
+
+
+
+
 		if ( is_user_logged_in() ) {
+
+
+
+
+
 
 		echo '<div class="title-bro">';
 
@@ -189,14 +199,57 @@ class Frontend_Post extends Widget_Base {
 
 }
 
-echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-content" class="el-fr-post-content global-class" placeholder="' . $placeholder_content . ' "required></textarea>';
+
+echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-content" class="el-fr-post-contentt global-class standard" placeholder="' . $placeholder_content . ' "required></textarea>';
 
 		if ( 'yes' == $settings['tinymce_on_off'] ) {
+
+			?> <style> .standard { display: none;}
+								 .el-fr-post-content { height: 400px; width: 100%;}
+	
+.content-label { display: none;}
+
+			</style> <?php
 
 			if ( 'yes' == $settings['show_labels'] ) {
 
  echo '<p class="input-label">' . $tiny_label .  ' </p>';
 }
+?>
+
+
+<!-- <textarea id="tinytext" class="tinytext"></textarea>
+
+		<script type="text/javascript">
+		jQuery( document ).ready( function( $ ) {
+		    tinymce.init( {
+		        mode : "exact",
+						selector: '#tinytext',
+
+		        skin: "lightgray",
+		        menubar : false,
+		        statusbar : false,
+
+
+						width: 500,
+		        toolbar: [
+		            "bold italic  | alignleft aligncenter alignright | bullist numlist outdent indent | undo redo",
+		        ],
+
+		        plugins : "paste",
+		        paste_auto_cleanup_on_paste : true,
+		        paste_postprocess : function( pl, o ) {
+		            o.node.innerHTML = o.node.innerHTML.replace( /&nbsp;+/ig, " " );
+		        }
+
+		    } );
+
+		} );
+
+		</script> -->
+
+<?php
+
 			wp_editor( $my_option , 'el-fr-post-content-wp', array(
 					'wpautop'       => true,
 					'media_buttons' => true,
@@ -205,12 +258,14 @@ echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-con
 					'textarea_rows' => '',
 			) );
 
-			?> <style> .el-fr-post-content { display: none;} .content-label { display: none;} </style> <?php
+
 
 }
 
 		echo '<button name="el-fr-post-submit" id="el-fr-post-submit" class="el-fr-post-submit" ><span>' . $submit_button . '</span></button>';
 		echo '</div>';
+
+
 	} else {
 
 		echo $html_logged_out;
@@ -219,7 +274,7 @@ echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-con
 
 	}
 
-		$settings = $this->get_settings();
+		// $settings = $this->get_settings();
 	}
 
 	/**
@@ -233,6 +288,8 @@ echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-con
 	 */
 	protected function _content_template() {
 		?>
+
+
 		<div class="custom-wrapper">
 			<# if ( 'yes' === settings.show_labels ) { #>
     <p class="input-label">{{{ settings.post_title_label }}}</p>
@@ -254,24 +311,31 @@ echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-con
 
 <# } #>
 
-<?php
-wp_editor( $my_option , 'el-fr-post-content-wp', array(
-		'wpautop'       => true,
-		'media_buttons' => true,
-		'textarea_name' => 'el-fr-post-tiny',
-		'editor_class'  => 'el-fr-post-tiny',
-		'textarea_rows' => '',
-) );
-?>
 
-<style> .el-fr-post-content { display: none;} .content-label { display: none;} </style>
+<style> .el-fr-post-content { display: none;} .content-label { display: none;} #tinytext { display: block;}
+
+button#insert-media-button {
+    display: none;
+}
+
+</style>
+
+
+<!-- <textarea id="tinytext-backend" class="tinytext">When You Refresh TinyMCE will fully load with Buttons.</textarea> -->
+<p> TinyMCE is not fully available in backend, all changes will be visible in frontend.</p>
 <# } #>
+
 
 
 <button name="el-fr-post-submit" id="el-fr-post-submit" class="el-fr-post-submit" ><span>{{{ settings.post_submit_button }}}</span></button>
 
+
+
 {{{ settings.html_logged_out}}}
 		</div>
+
+
+
 
 
 		<?php

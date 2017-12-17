@@ -3,23 +3,29 @@ jQuery( document ).ready( function ( $ ) {
 
 
     $( '.el-fr-post-submit' ).on( 'click', function(e) {
-        e.preventDefault();
-        var title = $( '#el-fr-post-title' ).val();
-        var content = tinymce.activeEditor.getContent();
 
-        if (content === null){
-        var content =  $( '#el-fr-post-content' ).val();
+      // var tinymce = tinymce.activeEditor.getContent();
+        e.preventDefault();
+        var titlebro = $( '#el-fr-post-title' ).val();
+        var contentbro = $( '#el-fr-post-content' ).val();
+        // var contentbro = tinymce.activeEditor.getContent();
+        if (!contentbro) {
+        var contentbro =  tinymce.activeEditor.getContent();
+        } else {
+          var contentbro = $( '#el-fr-post-content' ).val();
+
+
 
         }
+        var statusbro = 'publish';
 
-        var status = 'publish';
 
 
 
         var data = {
-            title: title,
-            content: content,
-            status: status,
+            title: titlebro,
+            content: contentbro,
+            status: statusbro,
         };
 
         $.ajax({
@@ -30,16 +36,18 @@ jQuery( document ).ready( function ( $ ) {
                 xhr.setRequestHeader( 'X-WP-Nonce', POST_SUBMITTER.nonce );
             },
             success : function( response ) {
-                console.log( response );
+                // console.log( response );
                 alert( POST_SUBMITTER.success );
             },
             fail : function( response ) {
-                console.log( response );
+                // console.log( response );
                 alert( POST_SUBMITTER.failure );
             }
 
         });
 
     });
+
+
 
 } );

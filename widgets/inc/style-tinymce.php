@@ -45,10 +45,10 @@ $this->add_control(
     'type' => Controls_Manager::COLOR,
     'scheme' => [
       'type' => Scheme_Color::get_type(),
-      'value' => Scheme_Color::COLOR_1,
+      'value' => Scheme_Color::COLOR_2,
     ],
     'selectors' => [
-      '.el-fr-post-content-wp.wp-editor, div#mceu_25-body' => 'background-color: {{VALUE}};',
+      '.el-fr-post-content-wp.wp-editor, div#mceu_25-body, textarea#el-fr-post-content-wp, .el-fr-post-content-wp post-type-page' => 'background-color: {{VALUE}};',
     ],
   ]
 );
@@ -61,7 +61,7 @@ $this->add_control(
     'type' => Controls_Manager::COLOR,
     'scheme' => [
       'type' => Scheme_Color::get_type(),
-      'value' => Scheme_Color::COLOR_2,
+      'value' => Scheme_Color::COLOR_4,
     ],
     'selectors' => [
       '#wp-el-fr-post-content-wp-wrap .mce-ico' => 'color: {{VALUE}};',

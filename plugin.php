@@ -63,7 +63,7 @@ class Plugin {
 	private function includes() {
 		require __DIR__ . '/widgets/frontend-post.php';
 		// require __DIR__ . '/widgets/inline-editing.php';
-		require __DIR__ . '/ajax.php';
+		
 	}
 
 	/**
