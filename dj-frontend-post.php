@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Elementor Frontend Post
  * Description: Enable Publishing Post's for Logged In users from Frontend via API. Hidden for logged-out users, And custom HTML or Elementor Template Shortcode for Them.
- * Version:     1.0
+ * Version:     1.1
  * Author:      Djekanovic
  * Author URI:  https://djekanovic.com/
  * Text Domain: dj-frontend-post
@@ -65,7 +65,8 @@ function dj_frontend_post_fail_load_out_of_date() {
 add_action( 'wp_enqueue_scripts', function() {
 
 	//load script
-	wp_enqueue_script( 'my-post-submitter', plugin_dir_url( __FILE__ ) . './assets/js/ajax.js', array( 'jquery' ) );
+	wp_enqueue_script( 'my-post-submitter', plugin_dir_url( __FILE__ ) . 'assets/js/ajax.js', array( 'jquery' ) );
+	wp_enqueue_style( 'default_style', plugin_dir_url( __FILE__ ) . 'assets/css/default.css');
 	// wp_enqueue_script( 'tiny-backend', plugin_dir_url( __FILE__ ) . './assets/js/tiny-backend.js', array( 'jquery' ) );
 	wp_enqueue_script( 'tinymce_js', includes_url( 'js/tinymce/' ) . 'wp-tinymce.php', array( 'jquery' ), false, true );
 

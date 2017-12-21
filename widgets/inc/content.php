@@ -184,7 +184,7 @@ $this->add_control(
   [
     'label' => __( 'Use TinyMCE', 'dj-frontend-post' ),
     'type' => Controls_Manager::SWITCHER,
-    'default' => '',
+    'default' => 'yes',
     'label_off' => __( 'no', 'dj-frontend-post' ),
     'label_on' => __( 'yes', 'dj-frontend-post' ),
     'return_value' => 'yes',
@@ -265,6 +265,24 @@ $this->add_responsive_control(
 
 
 $this->end_controls_section();
+$this->start_controls_section(
+  'section_post_image',
+  [
+    'label' => __( 'Featured Image Button', 'dj-frontend-post' ),
+  ]
+);
+
+$this->add_control(
+  'post_image_button',
+  [
+    'label' => __( 'Button Text', 'dj-frontend-post' ),
+    'type' => Controls_Manager::TEXT,
+    'default' => 'Add Featured Image',
+    // 'capability' => 'eedit_theme_optionss'
+  ]
+);
+$this->end_controls_section();
+
 $this->start_controls_section(
   'section_post_submit',
   [

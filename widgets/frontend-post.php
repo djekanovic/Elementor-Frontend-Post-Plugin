@@ -114,6 +114,9 @@ class Frontend_Post extends Widget_Base {
 	 */
 	protected function _register_controls() {
 
+		require __DIR__ . '/inc/post-settings.php';
+
+			$this->end_controls_section();
 
 // CONTENT SECTION HERE
 			require __DIR__ . '/inc/content.php';
@@ -122,6 +125,8 @@ class Frontend_Post extends Widget_Base {
 	$this->end_controls_section();
 
 	// STYLE SECTION - LABEL
+
+
 
 	require __DIR__ . '/inc/style-label.php';
 
@@ -135,6 +140,10 @@ class Frontend_Post extends Widget_Base {
 
 		$this->end_controls_section();
 
+		require __DIR__ . '/inc/style-image-button.php';
+
+		$this->end_controls_section();
+
 		require __DIR__ . '/inc/style-button.php';
 
 		$this->end_controls_section();
@@ -144,6 +153,10 @@ class Frontend_Post extends Widget_Base {
 		$this->end_controls_section();
 
 		require __DIR__ . '/inc/logged-out-html.php';
+
+
+
+
 
 
 
@@ -171,10 +184,8 @@ class Frontend_Post extends Widget_Base {
 		$my_option = get_option( 'my_option' );
 		$tiny_label = $this->get_settings( 'tinymce_label' );
 		$html_logged_out = $this->get_settings('html_logged_out');
-
-
-
-
+		$post_status = $this->get_settings('post_status');
+		$post_image_button = $this->get_settings('post_image_button');
 
 
 
@@ -206,7 +217,7 @@ echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-con
 
 			?> <style> .standard { display: none;}
 								 .el-fr-post-content { height: 400px; width: 100%;}
-	
+
 .content-label { display: none;}
 
 			</style> <?php
@@ -259,11 +270,74 @@ echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-con
 			) );
 
 
+?>
+
+<div class="featured-image-wrap">
+	<?php
+
+echo '<input id="frontend-button" type="button" value="'.$post_image_button.'" class="button frontend-button global-class" style="position: relative; z-index: 1;">'
+?>
+<img id="frontend-image" />
+
+</div>
+
+<script>
+
+
+(function($) {
+
+$(document).ready( function() {
+	var file_frame; // variable for the wp.media file_frame
+
+	// attach a click event (or whatever you want) to some element on your page
+	$( '#frontend-button' ).on( 'click', function( event ) {
+		event.preventDefault();
+
+        // if the file_frame has already been created, just reuse it
+		if ( file_frame ) {
+			file_frame.open();
+			return;
+		}
+
+		file_frame = wp.media.frames.file_frame = wp.media({
+			title: $( this ).data( 'uploader_title' ),
+			button: {
+				text: $( this ).data( 'uploader_button_text' ),
+			},
+			multiple: false // set this to true for multiple file selection
+		});
+
+		file_frame.on( 'select', function() {
+			attachment = file_frame.state().get('selection').first().toJSON();
+
+			// do something with the file here
+			// $( '#frontend-button' ).hide();
+			$( '#frontend-image' ).attr('src', attachment.url);
+		});
+
+		file_frame.open();
+	});
+});
+
+})(jQuery);
+
+ </script>
+
+<?php
 
 }
+echo '<input id="post_status" style="display:none;" " value="' .$post_status. '">  ';
 
-		echo '<button name="el-fr-post-submit" id="el-fr-post-submit" class="el-fr-post-submit" ><span>' . $submit_button . '</span></button>';
+?>
+
+
+<?php
+
+
+		echo '<button name="el-fr-post-submit" id="el-fr-post-submit" class="el-fr-post-submit global-class" ><span>' . $submit_button . '</span></button>';
 		echo '</div>';
+
+
 
 
 	} else {
@@ -312,7 +386,11 @@ echo ' <textarea rows="7" cols="60" name="el-fr-post-content" id="el-fr-post-con
 <# } #>
 
 
-<style> .el-fr-post-content { display: none;} .content-label { display: none;} #tinytext { display: block;}
+<style> .el-fr-post-content { display: none;} .content-label { display: none;}
+
+div#wp-el-fr-post-content-wp-editor-tools {
+    display: none;
+}
 
 button#insert-media-button {
     display: none;
@@ -323,7 +401,30 @@ button#insert-media-button {
 
 <!-- <textarea id="tinytext-backend" class="tinytext">When You Refresh TinyMCE will fully load with Buttons.</textarea> -->
 <p> TinyMCE is not fully available in backend, all changes will be visible in frontend.</p>
+
+<?php
+
+wp_editor( $my_option , 'el-fr-post-content-wp', array(
+		'wpautop'       => true,
+		'media_buttons' => true,
+		'textarea_name' => 'el-fr-post-tiny',
+		'editor_class'  => 'el-fr-post-tiny',
+		'textarea_rows' => '',
+) );
+?>
+
+<div class="featured-image-wrap">
+
+<input id="frontend-button" type="button" value="{{{settings.post_image_button}}}" class="button frontend-button global-class" style="position: relative; z-index: 1;">
+
+<img id="frontend-image" />
+
+</div>
+
 <# } #>
+
+
+
 
 
 

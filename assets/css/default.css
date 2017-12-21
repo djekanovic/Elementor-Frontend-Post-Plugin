@@ -1,0 +1,17 @@
+
+.featured-image-wrap {
+  display: flex;
+      align-items: center;
+      justify-content: center;
+          flex-flow: column-reverse;
+}
+.frontend-button {
+    width: 70%;
+}
+
+
+.featured-image-wrap
+ img {
+    max-width:  100px !important;
+    margin-top: 20px;
+}
